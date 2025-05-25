@@ -1,0 +1,15 @@
+normalOrder
+  ↓
+NormalOrder.prototype
+  ↓
+Order.prototype
+  ↓
+Object.prototype
+
+Saat kamu memanggil normalOrder.close(), JavaScript akan:
+
+Cek apakah close ada di normalOrder → ❌ Tidak
+
+Lalu cek NormalOrder.prototype.close → ❌ Tidak
+
+Lalu cek Order.prototype.close → ✅ Ketemu → Eksekusi

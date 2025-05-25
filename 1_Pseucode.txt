@@ -1,0 +1,43 @@
+PROGRAM OrderSystem
+    CLASS Customer
+        ATTRIBUTE: name, location
+        METHOD:
+            sendOrder(order):
+                tampilkan informasi pengiriman
+                tampilkan detail order
+
+            receiveOrder(order):
+                tampilkan informasi penerimaan
+
+    CLASS Order (Super Class)
+        ATTRIBUTE: date, number
+        METHOD:
+            confirm()
+                tampilkan pesan konfirmasi
+            close()
+                tampilkan pesan penutupan
+
+    CLASS SpecialOrder EXTENDS Order
+        METHOD:
+            dispatch()
+                tampilkan pesan pengiriman
+                panggil close()
+
+    CLASS NormalOrder EXTENDS Order
+        METHOD:
+            dispatch()
+                tampilkan pesan pengiriman
+                panggil receive()
+
+            receive()
+                tampilkan pesan penerimaan
+                panggil close()
+
+    ALUR PROGRAM:
+        Cetak “Mulai Proses Order”
+        Buat customer
+        Buat objek normalOrder dan specialOrder
+        customer mengirim kedua order
+        Konfirmasi dan kirim normalOrder → diterima → ditutup
+        Konfirmasi dan kirim specialOrder → langsung ditutup
+        Cetak “Proses Selesai”

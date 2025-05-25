@@ -1,0 +1,42 @@
+| Elemen                  | Fungsi                                                                  |
+| ----------------------- | ----------------------------------------------------------------------- |
+| `Order`                 | Superclass: menyimpan `date`, `number`, `confirm()`, `close()`          |
+| `NormalOrder`           | Subclass: pewarisan dari `Order`, menambah `dispatch()` dan `receive()` |
+| `SpecialOrder`          | Subclass: pewarisan dari `Order`, menambah `dispatch()`                 |
+| `Customer`              | Tidak ikut inheritance, tapi pemakai dari Order                         |
+| `Prototype`             | Mekanisme warisan method di belakang layar                              |
+| `Object.create()`       | Cara menghubungkan prototype antar class                                |
+| `Order.call(this, ...)` | Pewarisan atribut melalui constructor function                          |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| Komponen       | Fungsi                        | Keterangan Akademik                                            |
+| -------------- | ----------------------------- | -------------------------------------------------------------- |
+| `Customer`     | Entitas utama (aktor pemesan) | Punya method `sendOrder()` dan `receiveOrder()` sesuai diagram |
+| `Order`        | Superclass                    | Menyediakan method umum: `confirm()` dan `close()`             |
+| `SpecialOrder` | Subclass                      | Override dengan `dispatch()` saja                              |
+| `NormalOrder`  | Subclass                      | Tambah `dispatch()` dan `receive()`                            |
+| `logToPage()`  | Fungsi utilitas               | Menampilkan informasi ke halaman dengan `innerHTML`            |

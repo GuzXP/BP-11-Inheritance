@@ -1,0 +1,10 @@
+| Konsep Materi                         | Bukti Implementasi di Kode                                                         |
+| ------------------------------------- | ---------------------------------------------------------------------------------- |
+| Constructor Function                  | `function Order(date, number)`, `function Customer(...)`, dll                      |
+| Pewarisan Properti via `.call()`      | `Order.call(this, ...)` di `SpecialOrder` dan `NormalOrder`                        |
+| Pewarisan Method via Prototype        | `SpecialOrder.prototype = Object.create(Order.prototype)`                          |
+| Penambahan Method via Prototype       | `NormalOrder.prototype.dispatch = function () { ... }`                             |
+| Property Instance dari Constructor    | Properti `this.name`, `this.date`, `this.number` diset di constructor              |
+| Chain Method Call                     | Dalam `NormalOrder.dispatch()`, ada `this.receive()` yang memanggil `this.close()` |
+| Alternatif `instanceof` (duck typing) | Menghindari `instanceof`, cukup panggil `receive()` jika ada                       |
+| Output ke halaman                     | Menggunakan DOM: `document.getElementById("output").innerHTML += ...`              |
