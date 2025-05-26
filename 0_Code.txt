@@ -5,60 +5,67 @@
 // didefinisikan dalam superclass dan diwariskan ke subclasses.
 // Ini memungkinkan penulisan kode method hanya sekali.
 
+// ================================================================================ //
 // CLASS Customer
 // ATRIBUT: name: String, location: String
 // METHOD: sendOrder(order), receiveOrder(order)
 // Sumber menjelaskan bahwa constructor biasanya membuat property.
+// ================================================================================ //
 function Customer(name, location) {
-    this.name = name;
-    this.location = location;
+  this.name = name;
+  this.location = location;
 }
 
 // Sumber menjelaskan bahwa property (termasuk method) bisa ditambahkan ke prototype.
 // Menambah property ke Prototype akan membuat semua object instance yang turunan
 // dari prototype tersebut memiliki property tersebut.
-Customer.prototype.sendOrder = function(order) {
-    console.log(`Customer ${this.name} di ${this.location} sedang mengirim order...`);
-    // Dalam simulasi ini, method ini hanya mencetak pesan.
-    console.log("Detail Order:", order);
+Customer.prototype.sendOrder = function (order) {
+  console.log(
+    `Customer ${this.name} di ${this.location} sedang mengirim order...`
+  );
+  // Dalam simulasi ini, method ini hanya mencetak pesan.
+  console.log("Detail Order:", order);
 };
 
-Customer.prototype.receiveOrder = function(order) {
-    console.log(`Customer ${this.name} sedang menerima order.`);
-    // Method ini dipanggil di akhir alur NormalOrder.
-    console.log("Order Diterima:", order);
+Customer.prototype.receiveOrder = function (order) {
+  console.log(`Customer ${this.name} sedang menerima order.`);
+  // Method ini dipanggil di akhir alur NormalOrder.
+  console.log("Order Diterima:", order);
 };
 
-
+// ================================================================================ //
 // CLASS Order (Super Class)
 // ATRIBUT: date: Date, number: String
 // METHOD: confirm(), close()
 // Ini adalah superclass yang akan diwarisi oleh NormalOrder dan SpecialOrder.
+// ================================================================================ //
 function Order(date, number) {
-    // Properti date dan number dibuat di constructor Order.
-    this.date = date;
-    this.number = number;
-    console.log(`Order dengan nomor ${this.number} dibuat.`);
+  // Properti date dan number dibuat di constructor Order.
+  this.date = date;
+  this.number = number;
+  console.log(`Order dengan nomor ${this.number} dibuat.`);
 }
 
 // Method confirm dan close ditambahkan ke prototype Order.
-Order.prototype.confirm = function() {
-    console.log(`Order ${this.number} dikonfirmasi.`);
+Order.prototype.confirm = function () {
+  console.log(`Order ${this.number} dikonfirmasi.`);
 };
 
-Order.prototype.close = function() {
-    console.log(`Order ${this.number} ditutup.`);
+Order.prototype.close = function () {
+  console.log(`Order ${this.number} ditutup.`);
 };
 
-
+// ================================================================================ //
 // CLASS SpecialOrder EXTENDS Order
 // METHOD: dispatch()
 // SpecialOrder adalah turunan (subclass) dari Order.
+// Ini adalah contoh bagaimana subclass dapat mewarisi dari superclass.
+// ================================================================================ //
 function SpecialOrder(date, number) {
-    // Untuk mewarisi semua property yang dibuat di constructor Order,
-    // kita memanggil constructor Order menggunakan Order.call(this, parameter).
-    Order.call(this, date, number);
-    console.log("Object SpecialOrder dibuat.");
+  // Untuk mewarisi semua property yang dibuat di constructor Order,
+  // kita memanggil constructor Order menggunakan Order.call(this, parameter).
+  Order.call(this, date, number);
+  console.log("Object SpecialOrder dibuat.");
 }
 
 // Sumber menjelaskan bahwa saat membuat object instance, object tersebut
@@ -71,21 +78,22 @@ SpecialOrder.prototype = Object.create(Order.prototype);
 SpecialOrder.prototype.constructor = SpecialOrder;
 
 // Method dispatch ditambahkan ke prototype SpecialOrder.
-SpecialOrder.prototype.dispatch = function() {
-    console.log(`SpecialOrder ${this.number} dikirim.`);
-    // Dalam alur proses, setelah dispatch untuk SpecialOrder, order langsung ditutup (langkah 7).
-    // Method close diwarisi dari Order.prototype.
-    this.close(); // Mengakses method dari prototype parent.
+SpecialOrder.prototype.dispatch = function () {
+  console.log(`SpecialOrder ${this.number} dikirim.`);
+  // Dalam alur proses, setelah dispatch untuk SpecialOrder, order langsung ditutup (langkah 7).
+  // Method close diwarisi dari Order.prototype.
+  this.close(); // Mengakses method dari prototype parent.
 };
 
-
+// ================================================================================ //
 // CLASS NormalOrder EXTENDS Order
 // METHOD: dispatch(), receive()
 // NormalOrder juga adalah turunan (subclass) dari Order.
+// ================================================================================ //
 function NormalOrder(date, number) {
-    // Panggil constructor Order untuk mewarisi propertinya, sama seperti SpecialOrder.
-    Order.call(this, date, number);
-    console.log("Object NormalOrder dibuat.");
+  // Panggil constructor Order untuk mewarisi propertinya, sama seperti SpecialOrder.
+  Order.call(this, date, number);
+  console.log("Object NormalOrder dibuat.");
 }
 
 // Hubungkan prototype NormalOrder dengan prototype Order untuk inheritance.
@@ -93,19 +101,22 @@ NormalOrder.prototype = Object.create(Order.prototype);
 NormalOrder.prototype.constructor = NormalOrder;
 
 // Method dispatch dan receive ditambahkan ke prototype NormalOrder.
-NormalOrder.prototype.dispatch = function() {
-    console.log(`NormalOrder ${this.number} dikirim.`);
-    // Dalam alur proses, dispatch NormalOrder diikuti oleh receive oleh customer (langkah 6).
-    this.receive(); // Memanggil method receive yang ada di prototype NormalOrder.
+NormalOrder.prototype.dispatch = function () {
+  console.log(`NormalOrder ${this.number} dikirim.`);
+  // Dalam alur proses, dispatch NormalOrder diikuti oleh receive oleh customer (langkah 6).
+  this.receive(); // Memanggil method receive yang ada di prototype NormalOrder.
 };
 
-NormalOrder.prototype.receive = function() {
-    console.log(`NormalOrder ${this.number} diterima.`);
-    // Dalam alur proses, setelah receive NormalOrder, order ditutup (langkah 7).
-    // Method close diwarisi dari Order.prototype.
-    this.close(); // Mengakses method dari prototype parent.
+NormalOrder.prototype.receive = function () {
+  console.log(`NormalOrder ${this.number} diterima.`);
+  // Dalam alur proses, setelah receive NormalOrder, order ditutup (langkah 7).
+  // Method close diwarisi dari Order.prototype.
+  this.close(); // Mengakses method dari prototype parent.
 };
 
+// ================================================================================ //
+// OUTPUT:
+// ================================================================================ //
 
 // PROSES:
 console.log("\n--- Memulai Proses Order ---");
